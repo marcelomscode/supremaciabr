@@ -20,10 +20,9 @@ public class HomeController {
 	@GetMapping
 	public String index(Model model) {
 				
-		model.addAttribute("qtdmembros", membrosService.findAll());
-        model.addAttribute("videos", videoService.findAll());
-        model.addAttribute("teste","Liderress sdsdsdsd");
-		
+		model.addAttribute("qtdmembros", membrosService.findUniqueRecord());
+        model.addAttribute("videos", videoService.listaUltimosVideo());
+
 		return "index";
 	}
 	

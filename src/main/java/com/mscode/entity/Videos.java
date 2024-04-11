@@ -10,7 +10,7 @@ public class Videos {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idVideos;
+    private Long idVideos;
     private String url;
     private String titulo;
     private String subTitulo;
@@ -23,11 +23,11 @@ public class Videos {
     @Temporal(TemporalType.TIMESTAMP)
     private Date postadoEm;
 
-    public Integer getIdVideos() {
+    public Long getIdVideos() {
         return idVideos;
     }
 
-    public void setIdVideos(Integer idVideos) {
+    public void setIdVideos(Long idVideos) {
         this.idVideos = idVideos;
     }
 

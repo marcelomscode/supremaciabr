@@ -17,4 +17,21 @@ public class MembrosService {
         return membrosRepository.findAll();
     }
 
+    
+    public Membros  findUniqueRecord() {
+        return membrosRepository.findUniqueRecord();
+    }
+
+    public void criaMembros(Membros membro){
+        membrosRepository.save(membro);
+    }
+
+    public void editaQtdMembros(Membros membros) {
+        try {
+            membrosRepository.save(membros);
+        } catch (Exception e) {
+            e.getCause();
+        }
+    }
+    
 }

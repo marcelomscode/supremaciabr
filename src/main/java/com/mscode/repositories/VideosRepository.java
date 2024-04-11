@@ -8,8 +8,14 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface VideosRepository extends JpaRepository<Videos, Integer> {
+public interface VideosRepository extends JpaRepository<Videos, Long> {
 
-    @Query("select v from Videos v order by v.idVideos desc")
+    @Query("SELECT v FROM Videos v ORDER BY v.idVideos DESC")
     public List<Videos> findAllByOrderByIdDesc();
+
+    @Query("SELECT v FROM Videos v ORDER BY v.idVideos DESC LIMIT 3")
+    List<Videos> findFirst3ByOrderByidVideosDesc() ;
 }
+
+
+
