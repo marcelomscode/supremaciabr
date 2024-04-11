@@ -1,10 +1,8 @@
-<!DOCTYPE HTML>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Supremacia | BR</title>
-    <title th:text="${title} + ' | MSCODE'"></title>
+    <title th:text="Supremacia + ' | BR'"></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Site do Comando SMBR GTAV Online" />
     <meta name="keywords" content="GTAV SMBR Comando gtav online" />
@@ -27,25 +25,24 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
 
     <!-- Icomoon Icon Fonts-->
-    <link rel="stylesheet" href='<c:url value="resources/css/icomoon.css"/>'>
+    <link rel="stylesheet" href='/css/icomoon.css' />
     <!-- Bootstrap  -->
-    <link rel="stylesheet" href='<c:url value="resources/css/bootstrap.css"/>'>
-
+    <link rel="stylesheet" href='/css/bootstrap.css' />
     <!-- Magnific Popup -->
-    <link rel="stylesheet" href='<c:url value="resources/css/magnific-popup.css"/>'>
+    <link rel="stylesheet" href='/css/magnific-popup.css'>
 
     <!-- Owl Carousel  -->
-    <link rel="stylesheet" href='<c:url value="resources/css/owl.carousel.min.css"/>'>
-    <link rel="stylesheet" href='<c:url value="resources/css/owl.theme.default.min.css"/>'>
+    <link rel="stylesheet" href='/css/owl.carousel.min.css'>
+    <link rel="stylesheet" href='/css/owl.theme.default.min.css'>
 
     <!-- Theme style  -->
-    <link rel="stylesheet" href='<c:url value="resources/css/style.css"/>'>
+    <link rel="stylesheet" href='/css/style.css'>
 
     <!-- Modernizr JS -->
-    <script href='<c:url value="resources/js/modernizr-2.6.2.min.js"/>'></script>
+    <script href='/js/modernizr-2.6.2.min.js'></script>
     <!-- FOR IE9 below -->
     <!--[if lt IE 9]>
-    <script src="js/respond.min.js"></script>
+    <script src="/js/respond.min.js"></script>
     <![endif]-->
 
     <style type="text/css">
@@ -59,29 +56,28 @@
         .btn-primary {background: red; border: 2px solid red !important;}
         .feature-center .icon i {color: red;}
         .gtco-cover a {color: rgba(255, 255, 255, 1.0);}
+        .pagRegime{color: #fff !important;}
+        .gtco-nav {background-color: rgba(255,255,255,0.95) !important}
     </style>
-
-
-
 </head>
 <body>
 
 <div class="gtco-loader"></div>
 
-<div id="page">
+<div id="page" class="body-nav">
     <nav class="gtco-nav" role="navigation" style="border-bottom: 1px solid #ccc;">
         <div class="gtco-container">
             <div class="row">
                 <div class="col-xs-2">
-                    <div id="gtco-logo"><a href="https://supremaciabr.herokuapp.com/">SMBR</a></div>
+                    <div id="gtco-logo"><a href="/">SMBR</a></div>
                 </div>
                 <div class="col-xs-10 text-right menu-1">
                     <ul>
-                        <li id="pagIndex" ><a href="https://supremaciabr.herokuapp.com/">Home</a></li>
+                        <li id="pagIndex" ><a href="/">Home</a></li>
                         <li><a href="#">Sobre o comando</a></li>
                         <li class="pagRegime"><a href="regimeinterno">Regimento</a></li>
                         <li class="has-dropdown">
-                            <a href="services.html">Serviços</a>
+                            <a href="treinamento">TREINAMENTO</a>
                             <ul class="dropdown">
                                 <li><a href="#">Web Design</a></li>
                                 <li><a href="#">eCommerce</a></li>

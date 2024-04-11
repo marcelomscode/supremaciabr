@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.mscode.services.MembrosService;
 import com.mscode.services.VideoService;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class HomeController {
@@ -26,10 +27,17 @@ public class HomeController {
 		return "index";
 	}
 	
-	@GetMapping("/regimeinterno")
-	public String regimento() {
-		return "comum/regimentointerno";
+	@GetMapping("/treinamento")
+	public String treinamento() {
+		return "treinamento/treinamento";
 	}
-	
+
+	@GetMapping("/regimeinterno")
+	public String regimeinterno(Model model){
+	//	ModelAndView MV = new ModelAndView("regime/regimeinterno");
+//		MV.addObject("regras", regrasDAO.listaRegras());
+//		MV.addObject("regras2", regrasDAO.listaRegrasUltimos());
+		return "regime/regimeinterno";
+	}
 	
 }

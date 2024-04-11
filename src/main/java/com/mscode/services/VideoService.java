@@ -4,8 +4,6 @@ import com.mscode.entity.Videos;
 import com.mscode.repositories.VideosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.swing.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -22,8 +20,6 @@ public class VideoService {
     }
 
     public List<Videos> listaUltimosVideo(){
-//        TypedQuery<Videos> videos = manager.createQuery("from Videos order by idVideos desc", Videos.class);
-////        return videos.getResultList();
         return videosRepository.findFirst3ByOrderByidVideosDesc();
     }
 
