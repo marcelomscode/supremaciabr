@@ -1,29 +1,36 @@
-package com.mscode.controllers;
+package com.mscode.controller;
 
-import com.mscode.services.MembrosService;
-import com.mscode.services.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.mscode.services.MembrosService;
+import com.mscode.services.VideoService;
+
 @Controller
 public class HomeController {
-
+	
     @Autowired
     private VideoService videoService;
 
     @Autowired
     private MembrosService membrosService;
-
-    @GetMapping("/")
-    public String index(Model model) {
-
-        model.addAttribute("qtdmembros", membrosService.findAll());
+	
+	@GetMapping
+	public String index(Model model) {
+				
+		model.addAttribute("qtdmembros", membrosService.findAll());
         model.addAttribute("videos", videoService.findAll());
-
-        return "index";
-    }
-
-
+        model.addAttribute("teste","Liderress sdsdsdsd");
+		
+		return "index";
+	}
+	
+	@GetMapping("/regimeinterno")
+	public String regimento() {
+		return "comum/regimentointerno";
+	}
+	
+	
 }
