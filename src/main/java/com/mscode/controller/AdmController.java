@@ -1,5 +1,6 @@
 package com.mscode.controller;
 
+import com.mscode.entity.Regimento;
 import com.mscode.entity.Videos;
 import com.mscode.services.MembrosService;
 import com.mscode.services.RegimentoServices;
@@ -14,21 +15,17 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/adm")
 public class AdmController {
 
-    @Autowired
-    VideoService videoService;
-    @Autowired
-    RegimentoServices regimentoServices;
-    @Autowired
-    MembrosService membrosService;
-
+    @Autowired VideoService videoService;
+    @Autowired RegimentoServices regimentoServices;
+    @Autowired MembrosService membrosService;
 
     @RequestMapping("/console")
     public String balanosman(Model model){
 //        ModelAndView MV = new ModelAndView("adm/adm");
 
         model.addAttribute("ultimoVideo", videoService.findAll());
-        model.addAttribute("regras", regimentoServices.listaRegrasTodas());
         model.addAttribute("qtdmembros", membrosService.findAll());
+        model.addAttribute("regras", regimentoServices.listaRegrasTodas());
         return "adm/adm";
     }
 
@@ -50,6 +47,28 @@ public class AdmController {
         videoService.removeVideo(idVideo);
         return "redirect:/adm/console";
     }
+
+    @PostMapping("/editaRegras")
+    public String editaRegras(@ModelAttribute Regimento regimento, Model model){
+        regimentoServices.editaRegra(regimento);
+        return "redirect:/adm/console";
+    }
+
+     @GetMapping("/removeRegra/{idRegra}")
+    public String removeRegra(@PathVariable Long idRegra){
+         regimentoServices.removeRegra(idRegra);
+        return "redirect:/adm/console#regras";
+    }
+
+    @PostMapping("/cadastraRegras")
+    public String cadastraRegras(@ModelAttribute Regimento regra, Model model){
+        regimentoServices.criaRegra(regra);
+        return "redirect:/adm/console#regras";
+    }
+
+
+
+
 
 
 }

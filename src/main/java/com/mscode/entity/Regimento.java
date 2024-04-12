@@ -13,8 +13,15 @@ public class Regimento {
     private String titulo;
     private String tituloRegimento;
     private String subTituloDescricao;
+    private boolean active;
 
+    public boolean isActive(boolean b) {
+        return active;
+    }
 
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 
     public String getTituloRegimento() {
         return tituloRegimento;

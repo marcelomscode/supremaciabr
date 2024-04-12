@@ -123,11 +123,11 @@
                         <tr th:each="editaVideo : ${ultimoVideo}">
                             <form action="#" th:action="@{/adm/editaVideo}" th:object="${videos}" method="post" class="form-control formVideo" >
                                     <input type="hidden" name="idVideos" th:value="${editaVideo.idVideos}"/>
-                                    <td><input name="titulo" type="text" class="form-control" id="imagem" th:value="${editaVideo.titulo}"></td>
-                                    <td><input name="subTitulo" type="text" class="form-control" id="titulo" th:value="${editaVideo.subTitulo}"></td>
-                                    <td><input name="nomeImage" type="text" class="form-control" id="subTitulo" th:value="${editaVideo.nomeImage}"></td>
-                                    <td><input name="url" type="text" class="form-control" id="url" th:value="${editaVideo.url}"></td>
-                                    <td><input name="postadoEmTrans" type="text" class="form-control" id="postagem" th:value="${#dates.format(editaVideo.postadoEm, 'dd/MM/yyyy')}" /></td>
+                                    <td><input name="titulo" type="text" class="form-control" id="imagemVideo" th:value="${editaVideo.titulo}"></td>
+                                    <td><input name="subTitulo" type="text" class="form-control" id="tituloVideo" th:value="${editaVideo.subTitulo}"></td>
+                                    <td><input name="nomeImage" type="text" class="form-control" id="subTituloVideo" th:value="${editaVideo.nomeImage}"></td>
+                                    <td><input name="url" type="text" class="form-control" id="urlVideo" th:value="${editaVideo.url}"></td>
+                                    <td><input name="postadoEmTrans" type="text" class="form-control" id="postagemVideo" th:value="${#dates.format(editaVideo.postadoEm, 'dd/MM/yyyy')}" /></td>
                                     <td><button type="submit" class="btn btn-success btn-block">Enviar</button></td>
                                     <td><a th:href="'/adm/removeVideo/' + ${editaVideo.idVideos}" class="btn btn-Danger btn-block">X</a></td>
                             </form>
@@ -144,14 +144,14 @@
                         <div class="col-md-12 col-sm-6">
                             <div class="form-group">
                                 <label for="titulo" class="sr-only">Título</label>
-                                <input name="tituloRegimento"  type="text" class="form-control" id="titulo" placeholder="Título">
+                                <input name="tituloRegimento"  type="text" class="form-control" id="tituloRegimentoEditar" placeholder="Título">
                             </div>
                         </div>
 
                         <div class="col-md-12 col-sm-6">
                             <div class="form-group">
                                 <label for="descricao" class="sr-only">Descrição</label>
-                                <textarea name="subTituloDescricao"  class="form-control" id="descricao" placeholder="Descrição da Regra" rows="8"></textarea>
+                                <textarea name="subTituloDescricao"  class="form-control" id="subTituloDescricaoEditar" placeholder="Descrição da Regra" rows="8"></textarea>
                             </div>
                         </div>
 
@@ -162,7 +162,7 @@
 
                 </div>
 
-                <div class="col-md-12" style="margin-top: 50px">
+                <div class="col-md-12 regras" style="margin-top: 50px">
                     <h4>Editar Regras</h4>
                     <table class="table table-striped">
                         <tr>
@@ -172,21 +172,20 @@
                             <th style="text-align: center;">Editar</th>
                             <th style="text-align: center;">Remover</th>
                         </tr>
-                        <c:forEach items="${regras}" var="regras" >
-                            <form class="form-control formVideo" action="editaRegras" method="post">
-                                <input type="hidden" name="idRegimento" value="${regras.idRegimento}"  />
-                                <tr>
-                                    <td><input name="idRegimento" type="text" class="form-control" id="titulo" value="${regras.idRegimento}"></td>
-                                    <td><input name="tituloRegimento" type="text" class="form-control" id="titulo" value="${regras.tituloRegimento}"></td>
 
-                                    <td>
-                                        <textarea name="subTituloDescricao" class="form-control" id="descricao" rows="5">${regras.subTituloDescricao}</textarea>
-                                    </td>
-                                    <td><button type="submit" class="btn btn-success btn-block">Editar  Regra</button></td>
-                                    <td><a href="removeRegra?idRegra=${regras.idRegimento}" class="btn btn-Danger btn-block">X</a></td>
-                                </tr>
+                        <tr th:each="regras :${regras}">
+                            <form action="#" th:action="@{/adm/editaRegras}" th:object="${regimento}" method="post" class="form-control formVideo" >
+                                    <input type="hidden" name="idRegimento" th:value="${regras.idRegimento}"  />
+                                <td><input type="text" class="form-control" id="idRegimento" th:value="${regras.idRegimento}"></td>
+                                <td><input name="tituloRegimento" type="text" class="form-control" id="tituloRegimento" th:value="${regras.tituloRegimento}"></td>
+                                <td>
+                                    <textarea name="subTituloDescricao" class="form-control" id="subTituloDescricao" rows="5" th:text="${regras.subTituloDescricao}"></textarea>
+                                </td>
+                                <td><button type="submit" class="btn btn-success btn-block">Editar  Regra</button></td>
+                                <td><a th:href="'/adm/removeRegra/' + ${regras.idRegimento}" class="btn btn-Danger btn-block">X</a></td>
                             </form>
-                        </c:forEach>
+                        </tr>
+
                     </table>
                 </div>
             </div>

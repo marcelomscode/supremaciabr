@@ -1,6 +1,7 @@
 package com.mscode.services;
 
 import com.mscode.entity.Regimento;
+import com.mscode.exceptions.RegimentoException;
 import com.mscode.repositories.RegimentoRepository;
 import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,19 +18,41 @@ public class RegimentoServices {
     private RegimentoRepository regimentoRepository;
 
     public List<Regimento> listaRegras(){
-//        TypedQuery<Regimento> regras = manager.createQuery("from Regimento ORDER BY idRegimento", Regimento.class).setMaxResults(3);
-//        return regras.getResultList();
         return  regimentoRepository.findFirst3ByOrderByIdDesc();
-
     }
 
     public List<Regimento> listaRegrasTodas(){
-//        TypedQuery<Regimento> regras = manager.createQuery("from Regimento ORDER BY idRegimento", Regimento.class);
-//        return regras.getResultList();
-//
         return  regimentoRepository.findAllOrderByIdRegimento();
+    }
+
+    public void editaRegra(Regimento regra){
+        try {
+            regra.setActive(true);
+            regimentoRepository.save(regra);
+        } catch (Exception e) {
+            throw new RegimentoException("Não foi possível editar regra:" +e);
+        }
+    }
+
+    public void removeRegra(Long idRegra) {
+        try {
+            Regimento regra = regimentoRepository.findById(idRegra).orElseThrow();
+            regra.setActive(false);
+            regimentoRepository.save(regra);
+        } catch (Exception e) {
+            throw new RegimentoException("Não foi possível editar regra:" +e);
+        }
 
     }
+
+        public void criaRegra(Regimento regra){
+        try {
+            regimentoRepository.save(regra);
+        } catch (Exception e) {
+            throw new RegimentoException("Não foi possível criar regra:" +e);
+        }
+    }
+
 
 //    public List<Regimento> listaRegrasUltimos(){
 //        TypedQuery<Regimento> regras = manager.createQuery("from Regimento where idRegimento > 3", Regimento.class);
@@ -37,27 +60,10 @@ public class RegimentoServices {
 //    }
 //
 //
-//    public void criaRegra(Regimento regra){
-//        manager.persist(regra);
-//    }
+
 //
-//    public void editaRegra(Regimento regra){
-//        try {
-//            manager.merge(regra);
-//        } catch (Exception e) {
-//            JOptionPane.showMessageDialog(null, "Erro ao editar regra:" +e);
-//        }
-//    }
 //
-//    public void removeRegra(Integer idRegra) {
-//        try {
-//            Regimento regra = manager.find(Regimento.class, idRegra);
-//            manager.remove(regra);
-//        } catch (Exception e) {
-//
-//        }
-//
-//    }
+
 
 
 }
