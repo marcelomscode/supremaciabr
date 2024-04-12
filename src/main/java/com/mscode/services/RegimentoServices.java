@@ -47,23 +47,16 @@ public class RegimentoServices {
 
         public void criaRegra(Regimento regra){
         try {
+            regra.setActive(true);
             regimentoRepository.save(regra);
         } catch (Exception e) {
             throw new RegimentoException("Não foi possível criar regra:" +e);
         }
     }
 
-
 //    public List<Regimento> listaRegrasUltimos(){
 //        TypedQuery<Regimento> regras = manager.createQuery("from Regimento where idRegimento > 3", Regimento.class);
 //        return regras.getResultList();
 //    }
-//
-//
-
-//
-//
-
-
 
 }

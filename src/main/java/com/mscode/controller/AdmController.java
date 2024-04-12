@@ -48,6 +48,12 @@ public class AdmController {
         return "redirect:/adm/console";
     }
 
+    @PostMapping("/cadastraRegras")
+    public String cadastraRegras(@ModelAttribute Regimento regra, Model model){
+        regimentoServices.criaRegra(regra);
+        return "redirect:/adm/console#regras";
+    }
+
     @PostMapping("/editaRegras")
     public String editaRegras(@ModelAttribute Regimento regimento, Model model){
         regimentoServices.editaRegra(regimento);
@@ -60,11 +66,7 @@ public class AdmController {
         return "redirect:/adm/console#regras";
     }
 
-    @PostMapping("/cadastraRegras")
-    public String cadastraRegras(@ModelAttribute Regimento regra, Model model){
-        regimentoServices.criaRegra(regra);
-        return "redirect:/adm/console#regras";
-    }
+
 
 
 

@@ -28,20 +28,20 @@
                     algumas delas, será levado ao conselho, e dependendo da gravidade será expulso do comando.</p>
             </div>
         </div>
+
         <div class="row animated bounceInLeft" data-animate-effect="fadeIn">
             <div class="col-md-6">
-                <c:forEach items="${regras}" var="regras">
-                    <div class="feature-left animated bounceInLeft" data-animate-effect="fadeIn">
+                    <div class="feature-left animated bounceInLeft" data-animate-effect="fadeIn" th:each="regras : ${regras}">
 							<span class="icon">
 								<i class="icon-check"></i>
 							</span>
                         <div class="feature-copy">
-                            <h3>${regras.idRegimento} - ${regras.tituloRegimento}</h3>
-                            <p>${regras.subTituloDescricao}</p>
+                            <h3 th:text="${regras.tituloRegimento}"></h3>
+                            <p th:text="${regras.subTituloDescricao}"></p>
                         </div>
                     </div>
-                </c:forEach>
             </div>
+
             <div class="col-md-6">
                 <c:forEach items="${regras2}" var="regras2">
                     <div class="feature-left animated bounceInLeft" data-animate-effect="fadeIn">
