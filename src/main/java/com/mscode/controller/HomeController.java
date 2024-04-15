@@ -40,7 +40,6 @@ public class HomeController {
 	public String regimeinterno(Model model){
 
 		model.addAttribute("regras", regimentoServices.listaRegras());
-		//model.addAttribute("regras2", regimentoServices.listaRegrasUltimos());
 		return "regime/regimeinterno";
 	}
 	

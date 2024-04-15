@@ -40,7 +40,7 @@ public class RegimentoServices {
             regra.setActive(false);
             regimentoRepository.save(regra);
         } catch (Exception e) {
-            throw new RegimentoException("Não foi possível editar regra:" +e);
+            throw new RegimentoException();
         }
 
     }

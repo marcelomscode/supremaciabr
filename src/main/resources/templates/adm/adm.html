@@ -1,4 +1,5 @@
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<!DOCTYPE HTML>
+<html LANG="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
     <meta charset="utf-8">
@@ -36,6 +37,10 @@
         .formVideo{height: 430px;padding: 20px 0 20px 0;}
         .formRegras{height: 430px;padding: 20px 0 20px 0;}
 
+        .error {
+            color: red;
+        }
+
     </style>
 
 
@@ -62,6 +67,7 @@
 
         <div class="gtco-tab-content-wrap">
             <div class="gtco-tab-content tab-content active" data-tab-content="1">
+
                 <div class="col-md-4">
                     <h4>Inserir novo vídeo</h4>
                     <form class="form-control formVideo" action="#" th:action="@{/adm/cadastraVideo}" th:object="${videos}" method="post">
@@ -140,18 +146,20 @@
             <div class="gtco-tab-content tab-content" data-tab-content="2">
                 <div class="col-md-4">
                     <h4>Inserir Regras</h4>
-                    <form actrion="#" class="form-control formRegras" th:action="@{/adm/cadastraRegras}" object="${regra}" method="post">
+                    <form action="#" class="form-control formRegras" th:action="@{/adm/cadastraRegras}" th:object="${regimento}" method="post">
                         <div class="col-md-12 col-sm-6">
                             <div class="form-group">
                                 <label for="titulo" class="sr-only">Título</label>
-                                <input name="tituloRegimento"  type="text" class="form-control" id="tituloRegimentoEditar" placeholder="Título">
+                                <input th:field="*{tituloRegimento}"  type="text" class="form-control" id="tituloRegimentoEditar" placeholder="Título" />
+                                <p th:if="${#fields.hasErrors('tituloRegimento')}" th:errorclass="error" th:errors="*{tituloRegimento}"></p>
                             </div>
                         </div>
 
                         <div class="col-md-12 col-sm-6">
                             <div class="form-group">
                                 <label for="descricao" class="sr-only">Descrição</label>
-                                <textarea name="subTituloDescricao"  class="form-control" id="subTituloDescricaoEditar" placeholder="Descrição da Regra" rows="8"></textarea>
+                                <textarea th:field="*{subTituloDescricao}" type="text" class="form-control" id="subTituloDescricaoEditar" placeholder="Descrição da Regra" rows="8"></textarea>
+                                <p th:if="${#fields.hasErrors('subTituloDescricao')}" th:errorclass="error" th:errors="*{subTituloDescricao}">Campo maior do que o permitido</p>
                             </div>
                         </div>
 
@@ -174,12 +182,13 @@
                         </tr>
 
                         <tr th:each="regras :${regras}">
-                            <form action="#" th:action="@{/adm/editaRegras}" th:object="${regimento}" method="post" class="form-control formVideo" >
+                            <form action="#" th:action="@{/adm/editaRegras}" th:object="${regras}" method="post" class="form-control formVideo" >
                                     <input type="hidden" name="idRegimento" th:value="${regras.idRegimento}"  />
                                 <td><input type="text" class="form-control" id="idRegimento" th:value="${regras.idRegimento}"></td>
                                 <td><input name="tituloRegimento" type="text" class="form-control" id="tituloRegimento" th:value="${regras.tituloRegimento}"></td>
                                 <td>
                                     <textarea name="subTituloDescricao" class="form-control" id="subTituloDescricao" rows="5" th:text="${regras.subTituloDescricao}"></textarea>
+
                                 </td>
                                 <td><button type="submit" class="btn btn-success btn-block">Editar  Regra</button></td>
                                 <td><a th:href="'/adm/removeRegra/' + ${regras.idRegimento}" class="btn btn-Danger btn-block">X</a></td>
