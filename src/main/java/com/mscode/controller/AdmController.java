@@ -106,6 +106,7 @@ public class AdmController {
         return "redirect:/adm/testeError";
     }
 
+
     @PostMapping("/editaQtdMembros")
     public String editaQtdMembros(Membros membros){
         membrosService.editaQtdMembros(membros);
@@ -117,6 +118,7 @@ public class AdmController {
         membrosService.criaMembros(membros);
         return "redirect:/adm/console";
     }
+
 
 
 
