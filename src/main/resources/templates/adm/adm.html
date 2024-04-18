@@ -187,7 +187,7 @@
             <div class="gtco-tab-content tab-content" data-tab-content="3">
                 <div class="col-md-4">
                     <h4>Qtd. Membros</h4>
-                    <form class="form-control formRegras" action="#" th:action="@{/adm/cadastraQtdMembros}" method="post">
+                    <form class="form-control formRegras" action="#" th:action="@{/adm/cadastraQtdMembros}" method="post" id="formMembros">
                         <div class="col-md-12 col-sm-6">
                             <div class="form-group">
                                 <label for="titulo" class="sr-only">Líder</label>
@@ -224,9 +224,10 @@
 
 
                         <div class="col-md-12 col-sm-6">
-                            <button type="submit" class="btn btn-success btn-block">Cadastrar</button>
+                            <button type="submit" class="btn btn-success btn-block" th:disabled="${qtdmembros} != null">Cadastrar</button>
                         </div>
                     </form>
+                    <p class="error"  th:if="${qtdmembros} != null">Não é possível cadastrar a quantidade de novos membros, apenas editar a quantidade já existente.</p>
 
                 </div>
 
@@ -252,7 +253,7 @@
                                 <td><input name="representantes" type="text" class="form-control" id="representantetitulo" th:value="${qtdmembros.representantes}" required="required"></td>
                                 <td><input name="capangas" type="text" class="form-control" id="capangastitulo" th:value="${qtdmembros.capangas}" required="required"></td>
                                 <td><button type="submit" class="btn btn-success btn-block">Editar  Membros</button></td>
-                                <td><a href="#" class="btn btn-danger btn-block" aria-disabled="true">X</a></td>
+                                <td><button type="button" class="btn btn-danger btn-block" disabled="disabled">X</button></td>
                             </tr>
                         </form>
 
@@ -269,6 +270,18 @@
 <div class="gototop js-top">
     <a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
 </div>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var qtdmembros = /*[[${qtdmembros}]]*/ 'default';
+    if (qtdmembros != null) {
+        var inputs = document.getElementById('formMembros').getElementsByTagName('input');
+        for (var i = 0; i < inputs.length; i++) {
+            inputs[i].disabled = true;
+        }
+    }
+    /*]]>*/
+</script>
 
 <!-- jQuery -->
 <script src="/js/jquery.min.js"></script>
