@@ -30,7 +30,7 @@ public class MembrosService {
         try {
             membrosRepository.save(membros);
         } catch (Exception e) {
-            e.getCause();
+            throw new RuntimeException("Não foi possível editar membros:" +e);
         }
     }
     

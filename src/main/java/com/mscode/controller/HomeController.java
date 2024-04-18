@@ -1,5 +1,6 @@
 package com.mscode.controller;
 
+import com.mscode.services.RegimentoServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,9 @@ public class HomeController {
 
     @Autowired
     private MembrosService membrosService;
+
+	@Autowired
+	RegimentoServices regimentoServices;
 	
 	@GetMapping
 	public String index(Model model) {
@@ -34,9 +38,8 @@ public class HomeController {
 
 	@GetMapping("/regimeinterno")
 	public String regimeinterno(Model model){
-	//	ModelAndView MV = new ModelAndView("regime/regimeinterno");
-//		MV.addObject("regras", regrasDAO.listaRegras());
-//		MV.addObject("regras2", regrasDAO.listaRegrasUltimos());
+
+		model.addAttribute("regras", regimentoServices.listaRegras());
 		return "regime/regimeinterno";
 	}
 	

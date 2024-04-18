@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html LANG="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+<style>
+    .error {
+        color: red;
+    }
+</style>
+
+</head>
+<body>
+
+
+    <form th:action="@{/adm/editaError}" method="post" th:object="${regimento}">
+        <input type="text" th:field="*{idRegimento}" id="idRegimento" placeholder="idRegimento" >
+        <input type="text" th:field="*{titulo}" id="titulo" placeholder="titulo">
+        <input type="text" th:field="*{subTituloDescricao}" id="subTituloDescricao" placeholder="subTituloDescricao">
+        <p th:if="${#fields.hasErrors('subTituloDescricao')}" th:errorclass="error" th:errors="*{subTituloDescricao}">Campo maior do que o permitido</p>
+        <input type="submit" value="Enviar">
+    </form>
+
+
+</body>
+</html>
