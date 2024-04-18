@@ -7,6 +7,6 @@ import com.mscode.entity.Membros;
 
 public interface MembrosRepository extends JpaRepository<Membros, Integer> {
 	
-	@Query("SELECT m FROM Membros m")
+	@Query("SELECT m FROM Membros m ORDER BY m.idMembros LIMIT 1")
     public Membros findUniqueRecord();
 }

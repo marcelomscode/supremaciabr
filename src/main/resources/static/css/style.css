@@ -1399,13 +1399,11 @@ form label {
   opacity: 0;
 }
 
-/*# sourceMappingURL=style.css.map */
-
-
 /* css adm */
-.adminTopo{height: 600px;padding-top: 100px}
-
-
+.adminTopo{height: 50px;padding-top: 50px}
+.formVideo{height: 430px;padding: 20px 0 20px 0;}
+.formRegras{height: 430px;padding: 20px 0 20px 0;}
+.error {color: red;}
 
 
 

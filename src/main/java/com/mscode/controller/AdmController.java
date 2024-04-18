@@ -1,5 +1,6 @@
 package com.mscode.controller;
 
+import com.mscode.entity.Membros;
 import com.mscode.entity.Regimento;
 import com.mscode.entity.Videos;
 import com.mscode.services.MembrosService;
@@ -26,7 +27,7 @@ public class AdmController {
 //        ModelAndView MV = new ModelAndView("adm/adm");
 
         model.addAttribute("ultimoVideo", videoService.findAll());
-        model.addAttribute("qtdmembros", membrosService.findAll());
+        model.addAttribute("qtdmembros", membrosService.findUniqueRecord());
         model.addAttribute("regras", regimentoServices.listaRegrasTodas());
         model.addAttribute("regimento", new Regimento());
         return "adm/adm";
@@ -105,7 +106,17 @@ public class AdmController {
         return "redirect:/adm/testeError";
     }
 
+    @PostMapping("/editaQtdMembros")
+    public String editaQtdMembros(Membros membros){
+        membrosService.editaQtdMembros(membros);
+        return "redirect:/adm/console";
+    }
 
+    @PostMapping("/cadastraQtdMembros")
+    public String cadastraQtdMembros(Membros membros){
+        membrosService.criaMembros(membros);
+        return "redirect:/adm/console";
+    }
 
 
 
