@@ -2,9 +2,11 @@ package com.mscode.entity;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name = "membros")
-public class Membros {
+public class Membros implements Serializable {
 
 
     @Id

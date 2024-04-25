@@ -3,6 +3,8 @@ package com.mscode.services;
 import com.mscode.entity.Videos;
 import com.mscode.repositories.VideosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.stereotype.Service;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -10,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
+@EnableCaching
 public class VideoService {
 
     @Autowired
@@ -19,6 +22,7 @@ public class VideoService {
         return videosRepository.findAllByOrderByIdDesc();
     }
 
+    @Cacheable("videos")
     public List<Videos> listaUltimosVideo(){
         return videosRepository.findFirst3ByOrderByidVideosDesc();
     }
