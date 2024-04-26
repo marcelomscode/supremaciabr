@@ -3,11 +3,14 @@ package com.mscode.services;
 import com.mscode.entity.Membros;
 import com.mscode.repositories.MembrosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@EnableCaching
 public class MembrosService {
 
     @Autowired
@@ -17,7 +20,8 @@ public class MembrosService {
         return membrosRepository.findAll();
     }
 
-    
+
+    @Cacheable("membros")
     public Membros  findUniqueRecord() {
         return membrosRepository.findUniqueRecord();
     }

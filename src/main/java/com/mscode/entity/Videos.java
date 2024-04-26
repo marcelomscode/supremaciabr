@@ -2,11 +2,12 @@ package com.mscode.entity;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "videos")
-public class Videos {
+public class Videos implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,7 +16,6 @@ public class Videos {
     private String titulo;
     private String subTitulo;
     private String nomeImage;
-
 
     @Transient
     private String postadoEmTrans;
