@@ -2,6 +2,8 @@ package com.mscode.controller;
 
 import com.mscode.services.RegimentoServices;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,12 +23,22 @@ public class HomeController {
 
 	@Autowired
 	RegimentoServices regimentoServices;
-	
+
+
+	@GetMapping("/home")
+	public String home() {
+
+		System.out.println("Sem cache: /home");
+
+		return "hello";
+	}
 	@GetMapping
 	public String index(Model model) {
 				
 		model.addAttribute("qtdmembros", membrosService.findUniqueRecord());
         model.addAttribute("videos", videoService.listaUltimosVideo());
+
+		System.out.println("Com cache");
 
 		return "index";
 	}
