@@ -37,10 +37,7 @@ public class HomeController {
 				
 		model.addAttribute("qtdmembros", membrosService.findUniqueRecord());
         model.addAttribute("videos", videoService.listaUltimosVideo());
-
-		System.out.println("Com cache");
-
-		return "index";
+	return "index";
 	}
 	
 	@GetMapping("/treinamento")
