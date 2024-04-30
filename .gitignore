@@ -33,4 +33,5 @@ build/
 .vscode/
 
 ### APPLICATION PROPERTIES ###
-!**/src/main/resources/teste
+/src/main/resources/application-dev.properties
+
