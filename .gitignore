@@ -32,6 +32,11 @@ build/
 ### VS Code ###
 .vscode/
 
+<<<<<<< Updated upstream
+=======
+### APPLICATION PROPERTIES ###
+!**/src/main/resources/application-dev.properties
+>>>>>>> Stashed changes
 
 ### APPLICATION FILES ###
 application-dev.properties
