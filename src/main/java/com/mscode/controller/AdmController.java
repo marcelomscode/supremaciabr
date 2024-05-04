@@ -43,7 +43,7 @@ public class AdmController {
     @PostMapping("/editaVideo")
     public String editaVideo(@ModelAttribute Videos videos,Model model){
         videoService.editaVideo(videos);
-        return "/adm/console";
+        return "redirect:/adm/console";
     }
 
     @GetMapping("/removeVideo/{idVideo}")
