@@ -1,6 +1,7 @@
 package com.mscode.controller;
 
 import com.mscode.services.RegimentoServices;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.EnableCaching;
@@ -24,20 +25,20 @@ public class HomeController {
 	@Autowired
 	RegimentoServices regimentoServices;
 
+	private final RabbitTemplate rabbitTemplate;
 
-	@GetMapping("/home")
-	public String home() {
+    public HomeController(RabbitTemplate rabbitTemplate) {
+        this.rabbitTemplate = rabbitTemplate;
+    }
 
-		System.out.println("Sem cache: /home");
 
-		return "hello";
-	}
 	@GetMapping
 	public String index(Model model) {
 				
 		model.addAttribute("qtdmembros", membrosService.findUniqueRecord());
         model.addAttribute("videos", videoService.listaUltimosVideo());
-	return "index";
+
+		return "index";
 	}
 	
 	@GetMapping("/treinamento")
@@ -51,5 +52,9 @@ public class HomeController {
 		model.addAttribute("regras", regimentoServices.listaRegras());
 		return "regime/regimeinterno";
 	}
+
+
+
+
 	
 }
