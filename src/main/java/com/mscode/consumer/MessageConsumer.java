@@ -36,13 +36,9 @@ public class MessageConsumer {
     public void receiveMessages(Message message) throws AmqpException, IOException {
 
         try {
-
             MembrosDTO membrosDTO = (MembrosDTO) messageConverter.fromMessage(message);
-
             Membros membros = MembrosMapper.toEntity(membrosDTO);
-
             membrosService.criaMembros(membros);
-
             System.out.println("Mensagem recebida: " + membrosDTO.toString());
         } catch (Exception e) {
             System.err.println("Deu um erro ao ler a mensagem: " + e.getMessage());
