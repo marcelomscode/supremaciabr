@@ -1,12 +1,15 @@
 package com.mscode.config;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.core.userdetails.User;
@@ -31,7 +34,13 @@ public class SecurityConfig {
     @Value("${security.supremacia.password.admim}")
     String passwordAdmin;
 
+    @Autowired
+    private SecurityDatabaseService securityDatabaseService;
 
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(securityDatabaseService).passwordEncoder(NoOpPasswordEncoder.getInstance());
+    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -40,7 +49,7 @@ public class SecurityConfig {
                         authorizeRequests
                                 .requestMatchers("/","/regimeinterno","/treinamento","/resources/**", "/static/**", "/css/**", "/js/**", "/images/**")
                                 .permitAll()
-                                .requestMatchers("/adm/**").hasRole("ADMIN")
+                                .requestMatchers("/adm/**").hasRole("MANAGERS")
                                 .anyRequest()
                                 .authenticated()
                 )
@@ -48,19 +57,19 @@ public class SecurityConfig {
         return http.build();
     }
 
-    @Bean
-    public UserDetailsService userDetailsService() {
-        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-        manager.createUser(User.withUsername(user)
-                .password(passwordEncoder().encode(password))
-                .roles("USER")
-                .build());
-        manager.createUser(User.withUsername(userAdmin)
-                .password(passwordEncoder().encode(passwordAdmin))
-                .roles("ADMIN")
-                .build());
-        return manager;
-    }
+//    @Bean
+//    public UserDetailsService userDetailsService() {
+//        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+//        manager.createUser(User.withUsername(user)
+//                .password(passwordEncoder().encode(password))
+//                .roles("USER")
+//                .build());
+//        manager.createUser(User.withUsername(userAdmin)
+//                .password(passwordEncoder().encode(passwordAdmin))
+//                .roles("ADMIN")
+//                .build());
+//        return manager;
+//    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
