@@ -39,8 +39,13 @@
 <header class="col-md-12 adminTopo">
 
     <div class="col-md-12">
-        <h4>CONSOLE ADMINISTRADOR</h4>
+        <h4>CONSOLE ADMINISTRADOR
+        <form th:action="@{/logout}" method="post" style="float: right">
+            <button type="submit" class="btn btn-info" style="padding: 9px;border-radius: 4px;margin-top: -11px;">Logout</button>
+        </form>
+        </h4>
     </div>
+
 
     <div class="gtco-tabs">
         <ul class="gtco-tab-nav">

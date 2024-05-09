@@ -8,15 +8,24 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.Set;
 
-@Service
-public class SecurityDatabaseService  implements UserDetailsService {
+//@Service
+public class SecurityDatabaseService  implements UserDetailsLoader {
 
     @Autowired
     private UserRepository userRepository;
+
+
+    private final PasswordEncoder passwordEncoder;
+
+    @Autowired
+    public SecurityDatabaseService(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) {
@@ -29,7 +38,7 @@ public class SecurityDatabaseService  implements UserDetailsService {
             authorities.add(new SimpleGrantedAuthority("ROLE_" + role));
         });
         UserDetails user = new org.springframework.security.core.userdetails.User(userEntity.getUsername(),
-                userEntity.getPassword(),
+                passwordEncoder.encode(userEntity.getPassword()),
                 authorities);
         return user;
     }
