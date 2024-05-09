@@ -1,67 +1,82 @@
 package com.mscode.config;
 
 
-import org.springframework.beans.factory.annotation.Value;
+import com.mscode.entity.User;
+import com.mscode.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+
+import java.util.HashSet;
+import java.util.Set;
+
 import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
-    @Value("${security.supremacia.user}")
-    String user;
+    @Autowired
+    private UserRepository userRepository;
 
-    @Value("${security.supremacia.password}")
-    String password;
-
-    @Value("${security.supremacia.user.admim}")
-    String userAdmin;
-
-    @Value("${security.supremacia.password.admim}")
-    String passwordAdmin;
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
 
 
+//    @Autowired
+//    private SecurityDatabaseService securityDatabaseService;
+
+
+    @Bean
+    public UserDetailsService userDetailsService() {
+        return username -> {
+            User user = userRepository.findByUsername(username);
+            if (user == null) {
+                throw new UsernameNotFoundException(username);
+            }
+            Set<GrantedAuthority> authorities = new HashSet<>();
+            user.getRoles().forEach(role -> authorities.add(new SimpleGrantedAuthority("ROLE_" + role)));
+            return new org.springframework.security.core.userdetails.User(user.getUsername(),
+                    user.getPassword(), authorities);
+        };
+    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests(authorizeRequests ->
                         authorizeRequests
-                                .requestMatchers("/","/regimeinterno","/treinamento","/resources/**", "/static/**", "/css/**", "/js/**", "/images/**")
+                                .requestMatchers("/","/regimeinterno","/treinamento","/calendario","/recrutamento",
+
+                                        "/resources/**", "/static/**", "/css/**", "/js/**", "/images/**")
                                 .permitAll()
-                                .requestMatchers("/adm/**").hasRole("ADMIN")
+                                .requestMatchers("/adm/**").hasRole("MANAGERS")
                                 .anyRequest()
                                 .authenticated()
+
                 )
-                .formLogin(withDefaults());
+                .formLogin((formLogin) ->
+                        formLogin
+                            .loginPage("/login")
+                            .defaultSuccessUrl("/adm/console", true)
+                            .failureUrl("/login-error")
+                            .permitAll()
+                ).logout( (logout) -> logout
+                        .logoutSuccessUrl("/")
+                        .deleteCookies("JSESSIONID")
+                );
         return http.build();
     }
-
-    @Bean
-    public UserDetailsService userDetailsService() {
-        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-        manager.createUser(User.withUsername(user)
-                .password(passwordEncoder().encode(password))
-                .roles("USER")
-                .build());
-        manager.createUser(User.withUsername(userAdmin)
-                .password(passwordEncoder().encode(passwordAdmin))
-                .roles("ADMIN")
-                .build());
-        return manager;
-    }
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

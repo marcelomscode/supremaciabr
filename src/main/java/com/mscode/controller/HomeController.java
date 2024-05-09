@@ -40,10 +40,20 @@ public class HomeController {
 
 		return "index";
 	}
-	
+
 	@GetMapping("/treinamento")
 	public String treinamento() {
 		return "treinamento/treinamento";
+	}
+
+	@GetMapping("/calendario")
+	public String calendario() {
+		return "calendario/calendario";
+	}
+
+	@GetMapping("/recrutamento")
+	public String recrutamento() {
+		return "recrutamento/recrutamento";
 	}
 
 	@GetMapping("/regimeinterno")
@@ -53,8 +63,4 @@ public class HomeController {
 		return "regime/regimeinterno";
 	}
 
-
-
-
-	
 }
