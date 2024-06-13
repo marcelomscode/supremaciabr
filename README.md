@@ -8,7 +8,7 @@
   - Regras para fazer parte do comando
   - e mais
 
-#### Esse projeto foi desenvolvido em 2017 para um grupo de amigos, está sendo refatorando aos poucos para fins didáticos.
+#### Esse projeto foi desenvolvido em 2017 para um grupo de amigos, está sendo refatorando aos poucos para fins didáticos. O Layout para mobile ainda precisa de refinamentos, algumas telas quebram quando acessadas pelo celular.   
 
 Originalmente esse sistema foi desenvolvido com:
 
