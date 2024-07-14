@@ -33,11 +33,11 @@ public class HomeController {
 
 
 	@GetMapping
-	public String index(Model model) {
+	public String index(Model model, boolean email) {
 				
 		model.addAttribute("qtdmembros", membrosService.findUniqueRecord());
         model.addAttribute("videos", videoService.listaUltimosVideo());
-
+		model.addAttribute("email", email);
 		return "index";
 	}
 
