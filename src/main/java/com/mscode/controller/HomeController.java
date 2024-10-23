@@ -1,17 +1,12 @@
 package com.mscode.controller;
 
+import com.mscode.services.MembrosService;
 import com.mscode.services.RegimentoServices;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import com.mscode.services.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import com.mscode.services.MembrosService;
-import com.mscode.services.VideoService;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class HomeController {
@@ -25,11 +20,11 @@ public class HomeController {
 	@Autowired
 	RegimentoServices regimentoServices;
 
-	private final RabbitTemplate rabbitTemplate;
+//	private final RabbitTemplate rabbitTemplate;
 
-    public HomeController(RabbitTemplate rabbitTemplate) {
-        this.rabbitTemplate = rabbitTemplate;
-    }
+////    public HomeController(RabbitTemplate rabbitTemplate) {
+//        this.rabbitTemplate = rabbitTemplate;
+//    }
 
 
 	@GetMapping

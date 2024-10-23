@@ -1,19 +1,5 @@
 package com.mscode.consumer;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mscode.dto.MembrosDTO;
-import com.mscode.entity.Membros;
-import com.mscode.mappers.MembrosMapper;
-import com.mscode.services.MembrosService;
-import org.springframework.amqp.AmqpException;
-import org.springframework.amqp.core.Message;
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.amqp.support.converter.MessageConverter;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import org.springframework.stereotype.Component;
-import java.io.IOException;
-
 //@Component
 public class MessageConsumer {
 
