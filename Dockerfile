@@ -4,11 +4,11 @@ WORKDIR /app
 
 COPY . /app
 
-RUN mvn package
-
 ENV url_base_supremaciabr=$url_base_supremaciabr
 ENV username_supremaciabr=$username_supremaciabr
 ENV password_supremaciabr=$password_supremaciabr
+
+RUN mvn package
 
 FROM openjdk:17-jdk-slim
 
