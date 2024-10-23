@@ -6,12 +6,11 @@ COPY . /app
 
 RUN mvn package
 
-FROM openjdk:17-jdk-slim
-
 ENV url_base_supremaciabr=$url_base_supremaciabr
 ENV username_supremaciabr=$username_supremaciabr
 ENV password_supremaciabr=$password_supremaciabr
 
+FROM openjdk:17-jdk-slim
 
 COPY --from=build /app/target/*.jar /app/app.jar
 
