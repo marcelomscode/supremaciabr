@@ -6,13 +6,13 @@ COPY . /app
 
 # Passa variáveis como argumentos para o Maven no build
 ARG url_base_supremaciabr
-ARG db_username
-ARG db_password
+ARG username_supremaciabr
+ARG password_supremaciabr
 
 RUN mvn clean package -DskipTests \
     -Durl_base_supremaciabr=${url_base_supremaciabr} \
-    -Ddb_username=${username_supremaciabr} \
-    -Ddb_password=${password_supremaciabr}
+    -Dusername_supremaciabr=${username_supremaciabr} \
+    -Dpassword_supremaciabr=${password_supremaciabr}
 
 FROM openjdk:17-jdk-slim
 
