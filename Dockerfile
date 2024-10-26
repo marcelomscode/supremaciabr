@@ -11,6 +11,6 @@ RUN mvn clean package -DskipTests -Durl_base_supremaciabr=${url_base_supremaciab
 
 FROM openjdk:17-jdk-slim
 
-COPY --from=builder /app/target/*.jar /app/app.jar
+COPY --from=builder /app/target/supremaciabr.jar /app/app.jar
 
 ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./unrandom", "-jar", "/app/app.jar"]
