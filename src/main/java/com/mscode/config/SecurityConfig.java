@@ -58,7 +58,7 @@ public class SecurityConfig {
                         authorizeRequests
                                 .requestMatchers("/","/regimeinterno","/treinamento","/calendario","/recrutamento",
 
-                                        "/resources/**", "/static/**", "/css/**", "/js/**", "/images/**")
+                                        "/resources/**", "/static/**", "/fonts/**", "/css/**", "/js/**", "/images/**")
                                 .permitAll()
                                 .requestMatchers("/adm/**").hasRole("MANAGERS")
                                 .anyRequest()
