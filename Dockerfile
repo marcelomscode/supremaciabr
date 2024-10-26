@@ -4,7 +4,10 @@ WORKDIR /app
 
 COPY . /app
 
-RUN mvn package
+# Passa variáveis como argumentos para o Maven no build
+ARG url_base_supremaciabr
+
+RUN mvn clean package -DskipTests -Durl_base_supremaciabr=${url_base_supremaciabr}
 
 FROM openjdk:17-jdk-slim
 
